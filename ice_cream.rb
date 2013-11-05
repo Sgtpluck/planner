@@ -5,28 +5,34 @@ flavor = Hash.new
 name_hash = Hash.new
 
 	while i <= guest_num 
-		puts "Hey, what's your name?"
+		puts "Which guest?"
 		name = gets.chomp
-		puts "What's your favorite flavor? If you have more than one, please separate with a comma!"
+		puts "What's her favorite flavor? If she has more than one, please separate with a comma!"
 		fave = gets.chomp.split(/\,/)
 		flavor[name] = fave
-		fave.each do |favr|	
-			if name_hash.include?(favr)
-				name_hash[favr].push(name)
+		fave.each do |flvr|	
+			if name_hash.include?(flvr)
+				name_hash[flvr].push(name)
 			else
-				name_hash[favr] = [name]
+				name_hash[flvr] = [name]
 			end
 		end
 		
-		puts " -------"
+		puts " -----------------"
 
 		i += 1
 	end
 
-	puts "What kind of report would you like? Alphabetical by name, or by flavor?"
-		report = gets.chomp
-		if report == "name"  #Sorts alphabetically by name
+
+	puts "What kind of report would you like? Alphabetical by (n)ame, or by (f)lavor? Or perhaps most (p)opular flavor??"
+		report = gets.chomp.downcase
+		if report == "n"  #Sorts alphabetically by name
 			flavor.sort.each { |key,value| puts "#{key}'s enjoys #{value.join(" and ")}"} 
-		elsif report == "flavor"
+		elsif report == "f" #Sorts alphabetically by flavor name
 			name_hash.sort.each {|key,value| puts "#{key} is enjoyed by #{value.join(" and ")}!"}
+		elsif report == "p"
+			name_hash.sort_by.each do |key,value|
+				value.length.to_s.sort
+				puts "#{key} is liked by #{value.length}"
+			end
 		end
