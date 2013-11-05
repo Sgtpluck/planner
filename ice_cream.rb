@@ -31,8 +31,8 @@ name_hash = Hash.new
 		elsif report == "f" #Sorts alphabetically by flavor name
 			name_hash.sort.each {|key,value| puts "#{key} is enjoyed by #{value.join(" and ")}!"}
 		elsif report == "p"
-			name_hash.sort_by.each do |key,value|
-				value.length.to_s.sort
+			name_hash.each.sort_by do |key,value| 
+				value.length
 				puts "#{key} is liked by #{value.length}"
 			end
 		end
